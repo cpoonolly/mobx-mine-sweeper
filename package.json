@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.2.0",
     "chance": "^1.0.18",
     "lodash": "^4.17.14",
     "mobx": "^5.11.0",
