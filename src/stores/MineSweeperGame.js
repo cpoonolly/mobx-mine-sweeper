@@ -2,6 +2,7 @@ import { observable, computed, decorate, action } from "mobx";
 
 import Chance from 'chance';
 import _ from 'lodash';
+import moment, { relativeTimeThreshold } from 'moment';
 
 const chance = new Chance();
 
@@ -9,9 +10,14 @@ class MineSweeperGame {
   grid = [];
   numRows = 0;
   numCols = 0;
+  timeStart = 0;
+  timeCurrent = 0;
   
-  initializeGame(numMines, numRows, numCols) {
-    // console.log(`action initializeGame`);
+  constructor(numMines, numRows, numCols) {
+    
+    this.timeCurrent = moment();
+    this.timeStart = this.timeCurrent;
+    setInterval(() => this.tickTime(), 1000);
 
     this.numRows = numRows;
     this.numCols = numCols;
@@ -29,9 +35,20 @@ class MineSweeperGame {
     chance.pickset(cells, numMines).forEach(cell => cell.isMine = true);
   }
 
-  selectCell(row, col) {
-    // console.log(`action selectCell ${row} ${col}`);
+  tickTime() {
+    this.timeCurrent = moment();
+  }
 
+  flagCell(row, col) {
+    if (row < 0 || row >= this.grid.length-1) return;
+    if (col < 0 || col >= this.grid[0].length-1) return;
+    
+    const cell = this.grid[row][col];
+    cell.isFlagged = !cell.isFlagged;
+  }
+
+  selectCell(row, col) {
+    
     if (row < 0 || row >= this.grid.length-1) return;
     if (col < 0 || col >= this.grid[0].length-1) return;
     
@@ -53,34 +70,57 @@ class MineSweeperGame {
   }
 
   get numMines() {
-    // console.log(`computing numMines`);
     return _(this.grid).flatten().filter(cell => cell.isMine).size();
   }
 
   get numFlagged() {
-    // console.log(`computing numFlagged`);
     return _(this.grid).flatten().filter(cell => cell.isFlagged).size();
   }
 
   get numFlaggedMines() {
-    // console.log(`computing numFlaggedMines`);
     return _(this.grid).flatten().filter(cell => cell.isFlagged && cell.isMine).size();
   }
 
-  get isGameComplete() {
-    // console.log(`computing isGameComplete`);
-    return this.numFlaggedMines >= this.numMines;
+  get numSelected() {
+    return _(this.grid).flatten().filter(cell => cell.isSelected).size();
   }
 
-  get isGameOver() {
-    // console.log(`computing isGameOver`);
+  get isGameWon() {
+    return !this.isGameLost() && this.numSelected + this.numMines === this.numRows * this.numCols;
+  }
+
+  get isGameLost() {
     return _(this.grid).flatten().filter(cell => cell.isSelected && cell.isMine).some();
+  }
+
+  get secondsElapsed() {
+    return this.timeCurrent.diff(this.timeStart, 'seconds');
   }
 
   toString() {
     return this.grid.map((row) => row.map(cell => cell.toString()).join('')).join('\n');
   }
 }
+
+decorate(MineSweeperGame, {
+  grid: observable,
+  numRows: observable,
+  numCols: observable,
+  timeStart: observable,
+  timeCurrent: observable,
+
+  tickTime: action,
+  flagCell: action,
+  selectCell: action,
+
+  numMines: computed,
+  numFlagged: computed,
+  numFlaggedMines: computed,
+  numSelected: computed,
+  isGameWon: computed,
+  isGameLost: computed,
+  secondsElapsed: computed,
+});
 
 class Cell {
   game = null;
@@ -97,8 +137,7 @@ class Cell {
   }
 
   get neighbors() {
-    // console.log(`computing neighbors (${this.row}, ${this.col})`);
-
+    
     const {row, col} = this;
     const grid = this.game.grid;
     const neighbors = [];
@@ -133,12 +172,10 @@ class Cell {
   }
 
   get neighboringMines() {
-    // console.log(`computing neighboringMines (${this.row}, ${this.col})`);
     return this.neighbors.filter(cell => cell.isMine);
   }
 
   get neighboringMineCount() {
-    // console.log(`computing neighboringMineCount (${this.row}, ${this.col})`);
     return this.neighboringMines.length;
   }
 
@@ -152,21 +189,6 @@ class Cell {
     return (this.isSelected ? `[|${result}|]` : `[ ${result} ]`);
   }
 }
-
-decorate(MineSweeperGame, {
-  grid: observable,
-  numRows: observable,
-  numCols: observable,
-
-  initializeGame: action,
-  selectCell: action,
-
-  numMines: computed,
-  numFlagged: computed,
-  numFlaggedMines: computed,
-  isGameComplete: computed,
-  isGameOver: computed,
-});
 
 decorate(Cell, {
   game: observable,
