@@ -34,6 +34,10 @@
   padding: 20px;
 }
 
+.game-screen-rules {
+  margin-top: 20px;
+}
+
 .game-header {
   display: flex;
   flex-direction: row;
