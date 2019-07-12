@@ -14,6 +14,15 @@ class NewGameScreen extends React.Component {
     };
   }
 
+  isGameParamsValid() {
+    const {numMines, numRows, numCols} = this.state;
+
+    return numMines < numRows * numCols
+      && numMines > 0
+      && numRows > 0
+      && numCols > 0;
+  }
+
   handleNumMinesChange(numMines) {
     this.setState({numMines});
   }
@@ -26,8 +35,10 @@ class NewGameScreen extends React.Component {
     this.setState({numCols});
   }
 
-  handleNewGameBtnClick(event) {
+  handleNewGameBtnClick() {
     const {numMines, numRows, numCols} = this.state;
+
+    if (!this.isGameParamsValid()) return;
 
     this.props.onNewGame(new MineSweeperGame(numMines, numRows, numCols));
   }
@@ -51,7 +62,7 @@ class NewGameScreen extends React.Component {
         </div>
 
         <div className="new-game-btn">
-          <button onClick={() => this.handleNewGameBtnClick()}>New Game</button>
+          <button onClick={() => this.handleNewGameBtnClick()} disabled={!this.isGameParamsValid()}>New Game</button>
         </div>
       </div>
     );
