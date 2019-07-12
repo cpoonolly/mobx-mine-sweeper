@@ -1,9 +1,9 @@
 import React from 'react';
+import { when } from 'mobx';
 import { observer } from "mobx-react"
 
 import NewGameScreen from './components/NewGameScreen';
 import GameScreen from './components/GameScreen';
-import { MineSweeperGame } from './stores/MineSweeperGame';
 import './App.css';
 
 class App extends React.Component {
@@ -11,8 +11,18 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      game: new MineSweeperGame(2, 5, 5),
+      game: null,
     };
+
+    when(
+      () => this.state.game !== null && this.state.game.isGameLost,
+      () => alert('Game Over!')
+    );
+
+    when(
+      () => this.state.game !== null && this.state.game.isGameWon,
+      () => alert('You Win!')
+    );
   }
 
   handleNewGame(game) {

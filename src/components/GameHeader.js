@@ -2,10 +2,6 @@ import React from 'react';
 import { observer } from "mobx-react"
 
 class GameHeader extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   renderFace() {
     const {game} = this.props;
 
@@ -24,7 +20,7 @@ class GameHeader extends React.Component {
     return (
       <div className="game-header">
         <div className="game-header-mine-count">
-          Mines: {game.numMines}
+          Mines: {game.numMines - game.numFlagged}
         </div>
         <div className="game-header-face">
           {this.renderFace()}

@@ -5,10 +5,6 @@ import GameHeader from './GameHeader';
 import GameGrid from './GameGrid';
 
 class GameScreen extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div className="game-screen">

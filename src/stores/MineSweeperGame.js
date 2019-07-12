@@ -36,40 +36,10 @@ class MineSweeperGame {
   }
 
   tickTime() {
+    if (!this.isGameInProgress) return;
+
     this.timeCurrent = moment();
   }
-
-  /*
-  flagCell(row, col) {
-    if (row < 0 || row >= this.grid.length-1) return;
-    if (col < 0 || col >= this.grid[0].length-1) return;
-    
-    const cell = this.grid[row][col];
-    cell.isFlagged = !cell.isFlagged;
-  }
-
-  selectCell(row, col) {
-    
-    if (row < 0 || row >= this.grid.length-1) return;
-    if (col < 0 || col >= this.grid[0].length-1) return;
-    
-    const cell = this.grid[row][col];
-    cell.isSelected = true;
-
-    if (cell.isMine || cell.isSelected || cell.neighboringMineCount > 0) return;
-
-    this.selectCell(row-1, col);
-    this.selectCell(row+1, col);
-    this.selectCell(row, col-1);
-    this.selectCell(row, col+1);
-
-    this.selectCell(row-1, col-1);
-    this.selectCell(row-1, col+1);
-    this.selectCell(row+1, col-1);
-    this.selectCell(row+1, col+1);
-
-  }
-  */
 
   get numMines() {
     return _(this.grid).flatten().filter(cell => cell.isMine).size();
@@ -88,11 +58,15 @@ class MineSweeperGame {
   }
 
   get isGameWon() {
-    return !this.isGameLost && this.numSelected + this.numMines === this.numRows * this.numCols;
+    return !this.isGameLost && this.numSelected + this.numMines === this.numRows * this.numCols && this.numFlaggedMines === this.numMines;
   }
 
   get isGameLost() {
     return _(this.grid).flatten().filter(cell => cell.isSelected && cell.isMine).some();
+  }
+
+  get isGameInProgress() {
+    return !this.isGameWon && !this.isGameLost;
   }
 
   get secondsElapsed() {
@@ -112,8 +86,6 @@ decorate(MineSweeperGame, {
   timeCurrent: observable,
 
   tickTime: action,
-  flagCell: action,
-  selectCell: action,
 
   numMines: computed,
   numFlagged: computed,
@@ -121,6 +93,7 @@ decorate(MineSweeperGame, {
   numSelected: computed,
   isGameWon: computed,
   isGameLost: computed,
+  isGameInProgress: computed,
   secondsElapsed: computed,
 });
 
@@ -213,6 +186,9 @@ decorate(Cell, {
   isMine: observable,
   isFlagged: observable,
   isSelected: observable,
+
+  select: action,
+  flag: action,
 
   neighbors: computed,
   neighboringMines: computed,

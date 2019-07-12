@@ -8,10 +8,9 @@ class NewGameScreen extends React.Component {
     super(props);
 
     this.state = {
-      numMines: 0,
-      numRows: 1,
-      numCols: 1,
-      game: null,
+      numMines: 2,
+      numRows: 5,
+      numCols: 5,
     };
   }
 
@@ -29,41 +28,31 @@ class NewGameScreen extends React.Component {
 
   handleNewGameBtnClick(event) {
     const {numMines, numRows, numCols} = this.state;
-    this.setState({game: new MineSweeperGame(numMines, numRows, numCols)});
 
-    this.props.onNewGame(this.state.game);
-    event.preventDefault();
+    this.props.onNewGame(new MineSweeperGame(numMines, numRows, numCols));
   }
 
   render() {
     return (
       <div className="new-game-screen">
-        <form onSubmit={(e) => this.handleNewGameBtnClick(e)}>
-          <div className="new-game-input">
-            <label>
-              Number of Mines:
-              <input type="number" value={this.state.numMines} onChange={(e) => this.handleNumMinesChange(e.target.value)}></input>
-            </label>
-          </div>
+        <div className="new-game-input">
+          <label>Number of Mines:</label>
+          <input type="number" value={this.state.numMines} onChange={(e) => this.handleNumMinesChange(e.target.value)}></input>
+        </div>
 
-          <div className="new-game-input">
-            <label>
-              Number of Rows:
-              <input type="number" value={this.state.numRows} onChange={(e) => this.handleNumRowsChange(e.target.value)}></input>
-            </label>
-          </div>
+        <div className="new-game-input">
+          <label>Number of Rows:</label>
+          <input type="number" value={this.state.numRows} onChange={(e) => this.handleNumRowsChange(e.target.value)}></input>
+        </div>
 
-          <div className="new-game-input">
-            <label>
-              Number of Cols:
-              <input type="number" value={this.state.numCols} onChange={(e) => this.handleNumColsChange(e.target.value)}></input>
-            </label>
-          </div>
+        <div className="new-game-input">
+          <label>Number of Cols:</label>
+          <input type="number" value={this.state.numCols} onChange={(e) => this.handleNumColsChange(e.target.value)}></input>
+        </div>
 
-          <div className="new-game-input">
-            <input type="submit" value="New Game"></input>
-          </div>
-        </form>
+        <div className="new-game-btn">
+          <button onClick={() => this.handleNewGameBtnClick()}>New Game</button>
+        </div>
       </div>
     );
   }

@@ -3,21 +3,20 @@ import { observer } from "mobx-react"
 
 class GameGrid extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   handleCellClick(cell) {
+    if (!this.props.game.isGameInProgress) return;
     cell.select();
   }
 
   handleCellRightClick(cell) {
+    const {game} = this.props;
+
+    if (!game.isGameInProgress || game.numFlagged >= game.numMines) return;
     cell.flag();
   }
 
   renderCell(cell) {
     const {game} = this.props;
-
     let cellClasses = ['game-grid-cell'];
     let cellContents = (<React.Fragment>&nbsp;</React.Fragment>);
 
