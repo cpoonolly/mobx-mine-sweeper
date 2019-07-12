@@ -6,11 +6,11 @@ class GameHeader extends React.Component {
     const {game} = this.props;
 
     if (game.isGameWon) {
-      return (<React.Fragment>&#128512;</React.Fragment>); // Grinning Face Emoji
+      return (<>&#128512;</>); // Grinning Face Emoji
     } else if (game.isGameLost) {
-      return (<React.Fragment>&#128565;</React.Fragment>); // Dizzy Face Emoji
+      return (<>&#128565;</>); // Dizzy Face Emoji
     } else {
-      return (<React.Fragment>&#128528;</React.Fragment>); // Neutral Face Emoji
+      return (<>&#128528;</>); // Neutral Face Emoji
     }
   }
 

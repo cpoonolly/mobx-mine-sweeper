@@ -18,7 +18,7 @@ class GameGrid extends React.Component {
   renderCell(cell) {
     const {game} = this.props;
     let cellClasses = ['game-grid-cell'];
-    let cellContents = (<React.Fragment>&nbsp;</React.Fragment>);
+    let cellContents = (<>&nbsp;</>);
 
     if (cell.isSelected) {
       cellClasses.push('selected');
@@ -26,13 +26,13 @@ class GameGrid extends React.Component {
 
     if (cell.isMine && (cell.isSelected || game.isGameLost)) {
       cellClasses.push('bomb');
-      cellContents = (<React.Fragment>&#128163;</React.Fragment>); // Bomb Emoji
+      cellContents = (<>&#128163;</>); // Bomb Emoji
     } else if (cell.isFlagged) {
       cellClasses.push('flagged');
-      cellContents = (<React.Fragment>&#128205;</React.Fragment>); // Pin Emoji
+      cellContents = (<>&#128205;</>); // Pin Emoji
     } else if (cell.isSelected && cell.neighboringMineCount > 0) {
       cellClasses.push(`has-${cell.neighboringMineCount}-neighbors`);
-      cellContents = (<React.Fragment>{cell.neighboringMineCount}</React.Fragment>);
+      cellContents = (<>{cell.neighboringMineCount}</>);
     }
 
     return (
