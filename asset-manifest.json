@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/mobx-mine-sweeper/static/css/main.790a0534.chunk.css",
-    "main.js": "/mobx-mine-sweeper/static/js/main.1be41a25.chunk.js",
-    "main.js.map": "/mobx-mine-sweeper/static/js/main.1be41a25.chunk.js.map",
+    "main.css": "/mobx-mine-sweeper/static/css/main.63078339.chunk.css",
+    "main.js": "/mobx-mine-sweeper/static/js/main.79230cfb.chunk.js",
+    "main.js.map": "/mobx-mine-sweeper/static/js/main.79230cfb.chunk.js.map",
     "runtime~main.js": "/mobx-mine-sweeper/static/js/runtime~main.c9e52e8f.js",
     "runtime~main.js.map": "/mobx-mine-sweeper/static/js/runtime~main.c9e52e8f.js.map",
     "static/js/2.e19d02d3.chunk.js": "/mobx-mine-sweeper/static/js/2.e19d02d3.chunk.js",
     "static/js/2.e19d02d3.chunk.js.map": "/mobx-mine-sweeper/static/js/2.e19d02d3.chunk.js.map",
     "index.html": "/mobx-mine-sweeper/index.html",
-    "precache-manifest.8af07136e978a94146991a7818562c02.js": "/mobx-mine-sweeper/precache-manifest.8af07136e978a94146991a7818562c02.js",
+    "precache-manifest.bf7ff9f3edf04902de07852ba421a495.js": "/mobx-mine-sweeper/precache-manifest.bf7ff9f3edf04902de07852ba421a495.js",
     "service-worker.js": "/mobx-mine-sweeper/service-worker.js",
-    "static/css/main.790a0534.chunk.css.map": "/mobx-mine-sweeper/static/css/main.790a0534.chunk.css.map"
+    "static/css/main.63078339.chunk.css.map": "/mobx-mine-sweeper/static/css/main.63078339.chunk.css.map"
   }
 }
