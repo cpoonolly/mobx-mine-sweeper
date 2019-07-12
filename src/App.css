@@ -73,3 +73,35 @@
 .game-grid-cell.selected {
   background-color: grey;
 }
+
+.has-1-neighbors {
+  color: blue;
+}
+
+.has-2-neighbors {
+  color: green;
+}
+
+.has-3-neighbors {
+  color: red;
+}
+
+.has-4-neighbors {
+  color: darkblue;
+}
+
+.has-5-neighbors {
+  color: darkred;
+}
+
+.has-6-neighbors {
+  color: darkcyan;
+}
+
+.has-7-neighbors {
+  color: black;
+}
+
+.has-8-neighbors {
+  color: darkgrey;
+}
