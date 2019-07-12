@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "7f800d35ba4296e8dacdbbd2476346d0",
+    "revision": "15fb90f1bd86f2daf02234b851eb971b",
     "url": "/mobx-mine-sweeper/index.html"
   },
   {
