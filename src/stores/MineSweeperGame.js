@@ -2,7 +2,7 @@ import { observable, computed, decorate, action } from "mobx";
 
 import Chance from 'chance';
 import _ from 'lodash';
-import moment, { relativeTimeThreshold } from 'moment';
+import moment from 'moment';
 
 const chance = new Chance();
 
@@ -39,6 +39,7 @@ class MineSweeperGame {
     this.timeCurrent = moment();
   }
 
+  /*
   flagCell(row, col) {
     if (row < 0 || row >= this.grid.length-1) return;
     if (col < 0 || col >= this.grid[0].length-1) return;
@@ -68,6 +69,7 @@ class MineSweeperGame {
     this.selectCell(row+1, col+1);
 
   }
+  */
 
   get numMines() {
     return _(this.grid).flatten().filter(cell => cell.isMine).size();
@@ -86,7 +88,7 @@ class MineSweeperGame {
   }
 
   get isGameWon() {
-    return !this.isGameLost() && this.numSelected + this.numMines === this.numRows * this.numCols;
+    return !this.isGameLost && this.numSelected + this.numMines === this.numRows * this.numCols;
   }
 
   get isGameLost() {
@@ -134,6 +136,20 @@ class Cell {
     this.game = game;
     this.row = row;
     this.col = col;
+  }
+
+  flag() {
+    this.isFlagged = !this.isFlagged;
+  }
+
+  select() {
+    this.isSelected = true;
+
+    if (this.isMine || this.neighboringMineCount > 0) return;
+
+    this.neighbors
+      .filter(cell => !cell.isMine && !cell.isSelected)
+      .forEach(cell => cell.select());
   }
 
   get neighbors() {

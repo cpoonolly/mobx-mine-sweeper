@@ -1,4 +1,5 @@
 import React from 'react';
+import { observer } from "mobx-react"
 
 class GameHeader extends React.Component {
   constructor(props) {
@@ -9,11 +10,11 @@ class GameHeader extends React.Component {
     const {game} = this.props;
 
     if (game.isGameWon) {
-      return '&#128512;'; // Grinning Face Emoji
+      return (<React.Fragment>&#128512;</React.Fragment>); // Grinning Face Emoji
     } else if (game.isGameLost) {
-      return '&#128565;'; // Dizzy Face Emoji
+      return (<React.Fragment>&#128565;</React.Fragment>); // Dizzy Face Emoji
     } else {
-      return '&#128528;'; // Neutral Face Emoji
+      return (<React.Fragment>&#128528;</React.Fragment>); // Neutral Face Emoji
     }
   }
 
@@ -21,19 +22,19 @@ class GameHeader extends React.Component {
     const {game} = this.props;
 
     return (
-      <div class="game-header">
-        <div class="game-header-mine-count">
-          <h4>Mine Count: {game.numMines}</h4>
+      <div className="game-header">
+        <div className="game-header-mine-count">
+          Mines: {game.numMines}
         </div>
-        <div class="game-header-face">
-          <h4>Status: {this.renderFace()}</h4>
+        <div className="game-header-face">
+          {this.renderFace()}
         </div>
-        <div class="game-header-timer">
-          <h4>Time: {game.secondsElapsed}</h4>
+        <div className="game-header-timer">
+          Time: {game.secondsElapsed}
         </div>
       </div>
     );
   }
 }
 
-export default GameHeader;
+export default observer(GameHeader);

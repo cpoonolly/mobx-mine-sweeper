@@ -1,4 +1,6 @@
 import React from 'react';
+import { observer } from "mobx-react"
+
 import GameHeader from './GameHeader';
 import GameGrid from './GameGrid';
 
@@ -9,7 +11,7 @@ class GameScreen extends React.Component {
 
   render() {
     return (
-      <div class="game-screen">
+      <div className="game-screen">
         <GameHeader game={this.props.game}/>
         <GameGrid game={this.props.game}/>
       </div>
@@ -17,4 +19,4 @@ class GameScreen extends React.Component {
   }
 }
 
-export default GameScreen;
+export default observer(GameScreen);
