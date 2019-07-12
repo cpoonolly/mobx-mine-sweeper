@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/mobx-mine-sweeper/static/css/main.f48767c7.chunk.css",
+    "main.js": "/mobx-mine-sweeper/static/js/main.1be41a25.chunk.js",
+    "main.js.map": "/mobx-mine-sweeper/static/js/main.1be41a25.chunk.js.map",
+    "runtime~main.js": "/mobx-mine-sweeper/static/js/runtime~main.c9e52e8f.js",
+    "runtime~main.js.map": "/mobx-mine-sweeper/static/js/runtime~main.c9e52e8f.js.map",
+    "static/js/2.e19d02d3.chunk.js": "/mobx-mine-sweeper/static/js/2.e19d02d3.chunk.js",
+    "static/js/2.e19d02d3.chunk.js.map": "/mobx-mine-sweeper/static/js/2.e19d02d3.chunk.js.map",
+    "index.html": "/mobx-mine-sweeper/index.html",
+    "precache-manifest.2f971a3e76245c9e7309db7921e43e92.js": "/mobx-mine-sweeper/precache-manifest.2f971a3e76245c9e7309db7921e43e92.js",
+    "service-worker.js": "/mobx-mine-sweeper/service-worker.js",
+    "static/css/main.f48767c7.chunk.css.map": "/mobx-mine-sweeper/static/css/main.f48767c7.chunk.css.map"
+  }
+}
